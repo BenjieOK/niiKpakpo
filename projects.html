@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects & Initiatives | Edgar Nii Kpakpo Addo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Teko:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <main class="page-main">
+        <div class="container">
+            <h1 class="page-title">Projects & Initiatives</h1>
+            <p class="page-subtitle">A record of action and results for industry and education.</p>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x400/0A3D62/FFFFFF?text=Training+Center" alt="Offshore Training Center Development">
+                    <div class="project-content">
+                        <span class="project-status completed">Completed</span>
+                        <h3>Offshore Training Center Development</h3>
+                        <p>Played a pivotal role in the design, setup, and curriculum development for multiple maritime and offshore training centers across Africa and Asia, enhancing global safety and skill standards.</p>
+                        <a href="#" class="read-more" onclick="openModal('trainingCenterModal')">Learn More &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/600x400/18b15b/FFFFFF?text=TVET+Curriculum" alt="TVET Curriculum Design">
+                    <div class="project-content">
+                        <span class="project-status ongoing">Ongoing</span>
+                        <h3>TVET Curriculum Modernization</h3>
+                        <p>As a certified facilitator for COTVET, continuously developing and refining industry-relevant curricula that align with the latest technological advancements and employer needs in Ghana.</p>
+                        <a href="#" class="read-more" onclick="openModal('tvetModal')">Learn More &rarr;</a>
+                    </div>
+                </div>     
+            </div>
+        </div>
+    </main>
+    
+    <div id="trainingCenterModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('trainingCenterModal')">&times;</span>
+            <h3 class="modal-header">Offshore Training Center Development</h3>
+            <div class="modal-body">
+                <p>Nii Kpakpo has provided expert consulting services for the establishment of state-of-the-art training facilities. His portfolio includes the design, fabrication, installation, and maintenance of engineering structures for institutions like SMTC Global, Charkin Offshore Maritime, and Rig World Ghana. This work ensures that trainees receive hands-on experience with industry-standard equipment, preparing them for demanding roles in the maritime and oil & gas sectors.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="tvetModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('tvetModal')">&times;</span>
+            <h3 class="modal-header">TVET Curriculum Modernization</h3>
+            <div class="modal-body">
+                <p>With expertise in Competency-Based Training (CBT), Nii Kpakpo develops curricula that bridge the gap between theoretical knowledge and practical skills. He has frequently been sought by institutions to create modules that are not only academically rigorous but also intensely practical, ensuring graduates are job-ready and can contribute immediately to their employers' success.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script src="components.js"></script>
+</body>
+</html>
