@@ -648,3 +648,547 @@ header {
         padding: var(--spacing-lg);
     }
 }
+
+/* === ABOUT PAGE STYLES === */
+.about-page-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--spacing-xl);
+    align-items: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.about-page-image img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.about-page-content h2 {
+    margin-bottom: var(--spacing-md);
+}
+
+.elevator-pitch-section {
+    background-color: var(--color-background-light);
+    padding: var(--spacing-xl) 0;
+    text-align: center;
+}
+
+.elevator-pitch-section blockquote {
+    border: none;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.elevator-pitch-section blockquote p {
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--color-text-dark);
+    line-height: 1.5;
+}
+
+.elevator-pitch-section blockquote cite {
+    display: block;
+    margin-top: var(--spacing-md);
+    font-weight: bold;
+    color: var(--color-primary-blue);
+    font-style: normal;
+    font-family: var(--font-family-heading);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.expertise-section {
+    padding: var(--spacing-xl) 0;
+}
+
+.expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.expertise-card {
+    text-align: center;
+    padding: var(--spacing-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    transition: all var(--transition-speed);
+}
+
+.expertise-card:hover {
+    border-color: var(--color-accent-gold);
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow);
+}
+
+.expertise-card i {
+    font-size: 2.5rem;
+    color: var(--color-accent-gold);
+    margin-bottom: var(--spacing-md);
+}
+
+.expertise-card h3 {
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Responsive adjustments for about page */
+@media (max-width: 992px) {
+    .about-page-layout {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .about-page-image {
+        margin-bottom: var(--spacing-lg);
+    }
+}
+
+
+/* === PORTFOLIO PAGE: PROJECT INTEGRATION === */
+.section-subtitle {
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    text-align: left;
+    font-family: var(--font-family-heading);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.5rem;
+    color: var(--color-primary-blue);
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: var(--spacing-sm);
+}
+
+.projects-grid-portfolio {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+/* Re-using project-card styles for consistency */
+.projects-grid-portfolio .project-card {
+    background: var(--color-background-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all var(--transition-speed);
+}
+
+.projects-grid-portfolio .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.projects-grid-portfolio .project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.projects-grid-portfolio .project-card .project-content {
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* === HOME PAGE: CAROUSEL MOBILE RESPONSIVENESS === */
+@media (max-width: 992px) {
+    .carousel-item h1 {
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #hero-carousel {
+        height: 80vh; /* Adjust height for mobile */
+        min-height: 450px;
+    }
+    .carousel-item h1 {
+        font-size: 2.5rem;
+    }
+    .carousel-item p {
+        font-size: 1.1rem;
+        margin-bottom: var(--spacing-lg);
+    }
+    .carousel-control {
+        font-size: 1.5rem;
+        padding: var(--spacing-sm);
+    }
+    .carousel-dots {
+        bottom: var(--spacing-md);
+    }
+    .carousel-item .hero-content {
+        padding: var(--spacing-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-item h1 {
+        font-size: 2rem;
+    }
+    .carousel-item p {
+        display: none; /* Hide subtitle on very small screens to prevent clutter */
+    }
+    .carousel-control {
+        display: none; /* Hide arrows on very small screens, dots are sufficient */
+    }
+}
+
+/* === PORTFOLIO PAGE REDESIGN === */
+.portfolio-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.portfolio-section {
+    padding: var(--spacing-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.portfolio-section:last-of-type {
+    border-bottom: none;
+}
+
+/* Key Highlights Section */
+.key-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    text-align: center;
+    padding-bottom: var(--spacing-xl);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.highlight-card {
+    background: var(--color-background-white);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    transition: all var(--transition-speed);
+}
+
+.highlight-card i {
+    font-size: 2.5rem;
+    color: var(--color-accent-gold);
+    margin-bottom: var(--spacing-md);
+}
+
+.highlight-card h3 {
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Professional Experience Section */
+.experience-summary {
+    max-width: 800px;
+    margin: -2rem auto var(--spacing-xl) auto; /* Pulls text up slightly */
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.projects-grid-portfolio {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.projects-grid-portfolio .project-card {
+    background: var(--color-background-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all var(--transition-speed);
+}
+
+.projects-grid-portfolio .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.projects-grid-portfolio .project-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.projects-grid-portfolio .project-card .project-content {
+    padding: var(--spacing-lg);
+}
+
+/* Academic Journey Section */
+.academic-journey {
+    background-color: var(--color-background-light);
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius);
+    margin: var(--spacing-xl) 0;
+}
+
+.timeline {
+    list-style: none;
+    padding: 20px 0;
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.timeline:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 40px;
+    width: 2px;
+    background-color: var(--color-border);
+}
+.timeline li {
+    margin-bottom: 50px;
+    position: relative;
+    padding-left: 70px;
+}
+.timeline-badge {
+    position: absolute;
+    top: 0;
+    left: 15px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-primary-blue);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+.timeline-panel {
+    background: var(--color-background-white);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+.timeline-panel h4 {
+    margin-top: 0;
+    color: var(--color-primary-blue);
+}
+
+/* Publications Section */
+.constituency-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+}
+
+.constituency-work {
+    background: var(--color-background-light);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+}
+
+.constituency-work h4 {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.btn-link {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary-blue);
+    margin-top: var(--spacing-md);
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .constituency-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* === ICON BUTTON STYLE === */
+.btn-icon {
+    padding: 10px 14px; /* Adjust padding for a more square look */
+    font-size: 1.5rem; /* Make the icon larger */
+    line-height: 1; /* Center the icon vertically */
+    border-radius: 50%; /* Make it a circle */
+    width: 50px;
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* === SMART SCROLL BUTTON === */
+.scroll-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    background-color: var(--color-primary-blue);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    opacity: 0; /* Initially hidden */
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+}
+
+.scroll-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-btn:hover {
+    background-color: var(--color-accent-gold);
+    color: var(--color-text-dark);
+}
+
+/* === KEYFRAME ANIMATION FOR BOUNCING ARROW === */
+@keyframes bounce-arrow {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-8px);
+    }
+    60% {
+        transform: translateY(-4px);
+    }
+}
+
+/* === SMART SCROLL BUTTON (UPDATED) === */
+.scroll-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    background-color: var(--color-primary-blue);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    opacity: 0; /* Initially hidden */
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+}
+
+.scroll-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-btn:hover {
+    background-color: var(--color-accent-gold);
+    color: var(--color-text-dark);
+}
+
+/* NEW: Apply animation to the icon inside the button */
+.scroll-btn .fa-arrow-down {
+    animation: bounce-arrow 2s infinite;
+}
+
+/* === KEYFRAME ANIMATIONS FOR BOUNCING ARROWS === */
+@keyframes bounce-arrow {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-8px);
+    }
+    60% {
+        transform: translateY(-4px);
+    }
+}
+
+/* NEW: Keyframe for the up arrow */
+@keyframes bounce-arrow-up {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(8px);
+    }
+    60% {
+        transform: translateY(4px);
+    }
+}
+
+
+/* === SMART SCROLL BUTTON (UPDATED) === */
+/* ... (your existing .scroll-btn styles remain the same) ... */
+
+/* Apply animations to the icons inside the button */
+.scroll-btn .fa-arrow-down {
+    animation: bounce-arrow 2s infinite;
+}
+
+/* NEW: Apply up-bouncing animation to the up arrow */
+.scroll-btn .fa-arrow-up {
+    animation: bounce-arrow-up 2s infinite;
+}
+
+/* === SMART SCROLL BUTTON (UPDATED) === */
+.scroll-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    /* Changed background to accent gold and text to dark for contrast */
+    background-color: var(--color-accent-gold);
+    color: var(--color-text-dark);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    opacity: 0; /* Initially hidden */
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+}
+
+.scroll-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-btn:hover {
+    /* Changed hover background to primary blue for a nice effect */
+    background-color: var(--color-primary-blue);
+    color: var(--color-text-light);
+}
+
+/* Apply animations to the icons inside the button */
+.scroll-btn .fa-arrow-down {
+    animation: bounce-arrow 2s infinite;
+}
+
+.scroll-btn .fa-arrow-up {
+    animation: bounce-arrow-up 2s infinite;
+}
+
+

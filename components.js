@@ -431,3 +431,87 @@ window.onclick = function(event) {
         event.target.style.display = "none";
     }
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    // ... (existing loadComponent, hamburger, and nav link logic remains the same)
+
+    // Function to fetch and insert HTML components
+    const loadComponent = (selector, url) => {
+        fetch(url)
+            .then(response => response.ok ? response.text() : Promise.reject(response.status))
+            .then(data => {
+                const element = document.querySelector(selector);
+                if (element) element.innerHTML = data;
+                if (selector === '#header-placeholder') {
+                    attachHamburgerLogic();
+                    setActiveNavLink();
+                }
+                // NEW: Initialize scroll button after footer is loaded
+                if (selector === '#footer-placeholder') {
+                    initScrollButton();
+                }
+            })
+            .catch(error => console.error(`Error loading ${url}:`, error));
+    };
+
+    // Load header and footer
+    loadComponent("#header-placeholder", "nav.html");
+    loadComponent("#footer-placeholder", "footer.html");
+
+    const attachHamburgerLogic = () => {
+        // ... (existing code)
+    };
+    
+    const setActiveNavLink = () => {
+        // ... (existing code)
+    };
+
+    // --- NEW: Smart Scroll Button Logic ---
+    function initScrollButton() {
+        const scrollBtn = document.getElementById('scroll-btn');
+        if (!scrollBtn) return; // Exit if button doesn't exist
+
+        const icon = scrollBtn.querySelector('i');
+        const footer = document.querySelector('footer');
+
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const pageHeight = document.body.scrollHeight;
+
+            // Show the button after scrolling down 200px
+            if (scrollPosition > 200) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+
+            // Change icon to 'up' arrow if near the bottom of the page
+            if ((scrollPosition + windowHeight) >= (pageHeight - 150)) {
+                icon.classList.remove('fa-arrow-down');
+                icon.classList.add('fa-arrow-up');
+                scrollBtn.setAttribute('aria-label', 'Scroll to top');
+            } else {
+                icon.classList.remove('fa-arrow-up');
+                icon.classList.add('fa-arrow-down');
+                scrollBtn.setAttribute('aria-label', 'Scroll to bottom');
+            }
+        });
+
+        scrollBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // If up arrow is showing, scroll to the top
+            if (icon.classList.contains('fa-arrow-up')) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else { // Otherwise, scroll down to the footer
+                footer.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
+
+    // ... (existing blog and carousel logic remains the same)
+    
+});
+
+// ... (existing modal functions remain the same)
