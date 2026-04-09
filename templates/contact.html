@@ -1,0 +1,233 @@
+{% extends "base_inner.html" %}
+
+{% block title %}Contact Us — AnyAdviceApp{% endblock %}
+
+{% block content %}
+
+  <!-- ─── Page Hero ──────────────────────────────────────────────── -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-badge">Get in Touch</div>
+      <h1>We'd Love to Hear<br>From You</h1>
+      <p>Have a question, idea, or just want to say hello? We read every message and respond within 2 business days.</p>
+    </div>
+  </section>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- ─── Content ───────────────────────────────────────────────── -->
+  <section class="page-section">
+    <div class="container">
+
+      <div class="contact-layout">
+
+        <!-- Left: Info cards -->
+        <div class="contact-info-stack">
+
+          <div class="contact-info-card">
+            <div class="ci-icon">✉️</div>
+            <div class="ci-body">
+              <h4>Email Us</h4>
+              <p>For general enquiries and support</p>
+              <a href="mailto:theanyadviceapp@gmail.com">theanyadviceapp@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="contact-info-card">
+            <div class="ci-icon">💬</div>
+            <div class="ci-body">
+              <h4>Chat on WhatsApp</h4>
+              <p>Quick questions? Drop us a message</p>
+              <a href="https://wa.me/447000000000" target="_blank" rel="noopener">Open WhatsApp</a>
+            </div>
+          </div>
+
+          <div class="contact-info-card">
+            <div class="ci-icon">🏢</div>
+            <div class="ci-body">
+              <h4>Office</h4>
+              <p>AnyAdviceApp Ltd<br>London, United Kingdom</p>
+            </div>
+          </div>
+
+          <div class="contact-info-card">
+            <div class="ci-icon">🕐</div>
+            <div class="ci-body">
+              <h4>Response Time</h4>
+              <p>We aim to respond within <strong>2 business days</strong>. For urgent safeguarding concerns, please call 999.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Form -->
+        <div class="contact-form-wrap">
+          <h3>Send a Message</h3>
+          <p class="form-subtitle">Fill in the form below and we'll get back to you shortly.</p>
+
+          <div id="contactFormWrap">
+            <form id="contactForm" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contactFirstName">First Name</label>
+                  <div class="input-wrap">
+                    <span class="input-icon">👤</span>
+                    <input type="text" id="contactFirstName" placeholder="Emma" autocomplete="given-name" />
+                  </div>
+                  <span class="field-error" id="cfFirstErr"></span>
+                </div>
+                <div class="form-group">
+                  <label for="contactLastName">Last Name</label>
+                  <div class="input-wrap">
+                    <span class="input-icon">👤</span>
+                    <input type="text" id="contactLastName" placeholder="Johnson" autocomplete="family-name" />
+                  </div>
+                  <span class="field-error" id="cfLastErr"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contactEmail">Email Address</label>
+                <div class="input-wrap">
+                  <span class="input-icon">✉️</span>
+                  <input type="email" id="contactEmail" placeholder="emma@example.com" autocomplete="email" />
+                </div>
+                <span class="field-error" id="cfEmailErr"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="contactSubject">Subject</label>
+                <div class="input-wrap">
+                  <span class="input-icon">📝</span>
+                  <input type="text" id="contactSubject" placeholder="General enquiry" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contactMessage">Message</label>
+                <div class="input-wrap">
+                  <textarea
+                    id="contactMessage"
+                    rows="5"
+                    placeholder="Tell us how we can help..."
+                    style="
+                      width:100%;padding:13px 14px;background:#fff;
+                      border:1px solid var(--border);border-radius:12px;
+                      color:var(--text);font-size:15px;font-family:Urbanist,sans-serif;
+                      outline:none;resize:vertical;line-height:1.5;
+                    "
+                    onfocus="this.style.borderColor='#111';this.style.boxShadow='0 0 0 3px rgba(0,0,0,0.08)';"
+                    onblur="this.style.borderColor='var(--border)';this.style.boxShadow='none';"
+                    oninput="document.getElementById('cfCharCount').textContent=this.value.length"
+                  ></textarea>
+                  <div class="char-counter"><span id="cfCharCount">0</span> / 1000</div>
+                </div>
+                <span class="field-error" id="cfMsgErr"></span>
+              </div>
+
+              <button type="submit" class="btn btn-primary form-submit" id="contactSubmitBtn">
+                <span>✉️</span>
+                <span>Send Message</span>
+              </button>
+            </form>
+          </div>
+
+          <div class="contact-success" id="contactSuccess">
+            <div class="success-icon">✅</div>
+            <h3>Message received!</h3>
+            <p style="color:var(--text-muted);max-width:320px;margin:0 auto;line-height:1.7;">
+              Thank you for reaching out. We'll get back to you within 2 business days.
+            </p>
+            <a href="/" class="btn btn-primary" style="margin-top:24px;">Back to Home →</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+function getCsrfToken() {
+  const match = document.cookie.match(/csrftoken=([^;]+)/);
+  return match ? match[1] : "";
+}
+
+function setFieldErr(id, errId, msg) {
+  const el  = document.getElementById(id);
+  const err = document.getElementById(errId);
+  if (!el) return;
+  if (msg) { el.classList.add("error"); el.classList.remove("valid"); if (err) err.textContent = msg; }
+  else     { el.classList.remove("error"); el.classList.add("valid"); if (err) err.textContent = ""; }
+}
+
+const contactForm = document.getElementById("contactForm");
+if (contactForm) {
+  contactForm.addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const firstName = document.getElementById("contactFirstName").value.trim();
+    const lastName  = document.getElementById("contactLastName").value.trim();
+    const email     = document.getElementById("contactEmail").value.trim();
+    const subject   = document.getElementById("contactSubject").value.trim();
+    const message   = document.getElementById("contactMessage").value.trim();
+
+    let valid = true;
+    if (firstName.length < 2) { setFieldErr("contactFirstName","cfFirstErr","Please enter your first name"); valid = false; }
+    else setFieldErr("contactFirstName","cfFirstErr",null);
+
+    if (lastName.length < 2)  { setFieldErr("contactLastName","cfLastErr","Please enter your last name"); valid = false; }
+    else setFieldErr("contactLastName","cfLastErr",null);
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setFieldErr("contactEmail","cfEmailErr","Please enter a valid email address"); valid = false; }
+    else setFieldErr("contactEmail","cfEmailErr",null);
+
+    if (message.length < 10) { setFieldErr("contactMessage","cfMsgErr","Please enter a message (at least 10 characters)"); valid = false; }
+    else setFieldErr("contactMessage","cfMsgErr",null);
+
+    if (!valid) return;
+
+    const btn = document.getElementById("contactSubmitBtn");
+    btn.disabled = true;
+    btn.innerHTML = "<span>⏳</span><span>Sending...</span>";
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-CSRFToken": getCsrfToken() },
+        body: JSON.stringify({ firstName, lastName, email, subject, message }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        const errMsg = data.errors?.general || "Something went wrong. Please try again.";
+        showToast("error", "Error", errMsg);
+        btn.disabled = false;
+        btn.innerHTML = "<span>✉️</span><span>Send Message</span>";
+        return;
+      }
+
+      document.getElementById("contactFormWrap").style.display = "none";
+      document.getElementById("contactSuccess").style.display = "block";
+      showToast("success", "Message sent!", "We'll get back to you within 2 business days.");
+    } catch (_) {
+      showToast("error", "Connection error", "Please check your internet connection and try again.");
+      btn.disabled = false;
+      btn.innerHTML = "<span>✉️</span><span>Send Message</span>";
+    }
+  });
+}
+
+/* Pre-fill subject from URL param (used by careers page) */
+const urlParams = new URLSearchParams(window.location.search);
+const subjectParam = urlParams.get("subject");
+if (subjectParam) {
+  const subjectEl = document.getElementById("contactSubject");
+  if (subjectEl) subjectEl.value = decodeURIComponent(subjectParam);
+}
+</script>
+{% endblock %}

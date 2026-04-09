@@ -1,0 +1,28 @@
+{% load static %}
+<nav id="navbar"{% if nav_dark %} class="nav-dark"{% endif %}>
+  <div class="nav-inner">
+    <a href="{% if home %}#{% else %}/{% endif %}" class="nav-logo">
+      <img src="{% static 'assets/icons/logo-black.png' %}" alt="AnyAdviceApp" class="logo-img logo-for-light" />
+      <img src="{% static 'assets/icons/logo-white.png' %}" alt="AnyAdviceApp" class="logo-img logo-for-dark" />
+    </a>
+    <div class="nav-links">
+      <a href="{% if home %}#features{% else %}/#features{% endif %}">Features</a>
+      <a href="{% if home %}#demo{% else %}/#demo{% endif %}">How It Works</a>
+      <a href="/contact/"{% if active == 'contact' %} class="active"{% endif %}>Contact</a>
+      <a href="/careers/"{% if active == 'careers' %} class="active"{% endif %}>Careers</a>
+    </div>
+    <div class="nav-cta">
+      <a href="{% if home %}#waitlist{% else %}/#waitlist{% endif %}" class="btn btn-ghost" style="padding:10px 22px;font-size:14px">Join Waitlist</a>
+      <a href="{% if home %}#survey{% else %}/#survey{% endif %}"   class="btn btn-primary" style="padding:10px 22px;font-size:14px">Take Survey</a>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">☰</button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="{% if home %}#features{% else %}/#features{% endif %}">Features</a>
+    <a href="{% if home %}#demo{% else %}/#demo{% endif %}">How It Works</a>
+    <a href="/contact/">Contact</a>
+    <a href="/careers/">Careers</a>
+    <a href="{% if home %}#waitlist{% else %}/#waitlist{% endif %}" class="btn btn-ghost">Join Waitlist</a>
+    <a href="{% if home %}#survey{% else %}/#survey{% endif %}"   class="btn btn-primary">Take Survey</a>
+  </div>
+</nav>

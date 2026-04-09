@@ -1,0 +1,888 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AnyAdviceApp — Join the Waiting List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{% static 'assets/icons/logo-black.png' %}" />
+    <link rel="apple-touch-icon" href="{% static 'assets/icons/logo-black.png' %}" />
+  </head>
+  <body>
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particles"></canvas>
+
+    <!-- ─── Navigation ─────────────────────────────────────────────────── -->
+    {% include '_nav.html' with home=True %}
+
+    <!-- ─── Hero ───────────────────────────────────────────────────────── -->
+    <section id="hero">
+      <div class="hero-bg"></div>
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="hero-eyebrow reveal">
+              <span class="badge"
+                ><span class="dot"></span> Coming Soon — Limited Early
+                Access</span
+              >
+            </div>
+            <h1 class="hero-title reveal reveal-delay-1">
+              Your Safe Space for
+              <span class="grad-text">Anonymous Counselling</span>
+            </h1>
+            <p class="hero-sub reveal reveal-delay-2">
+              AnyAdviceApp connects you with certified mental health
+              professionals in a secure, judgement-free environment. Get expert
+              guidance when you need it most.
+            </p>
+            <div class="hero-actions reveal reveal-delay-3">
+              <a href="#waitlist" class="btn btn-primary">
+                <span>Join the Waitlist</span>
+                <span>→</span>
+              </a>
+              <a href="#demo" class="btn btn-ghost">Watch Demo</a>
+            </div>
+            <div class="hero-trust reveal reveal-delay-4">
+              <div class="avatars">
+                <span>👩</span>
+                <span>👨</span>
+                <span>🧑</span>
+                <span>👩</span>
+              </div>
+              <span
+                >Join <strong id="waitlistCount">0</strong> people already on
+                the waiting list</span
+              >
+            </div>
+
+            <!-- Countdown -->
+            <div class="countdown-wrap reveal reveal-delay-5">
+              <p class="countdown-label">App launches in</p>
+              <div class="countdown-boxes">
+                <div class="countdown-box">
+                  <span id="cd-days">00</span>
+                  <span class="cd-unit">Days</span>
+                </div>
+                <span class="countdown-sep">:</span>
+                <div class="countdown-box">
+                  <span id="cd-hours">00</span>
+                  <span class="cd-unit">Hours</span>
+                </div>
+                <span class="countdown-sep">:</span>
+                <div class="countdown-box">
+                  <span id="cd-minutes">00</span>
+                  <span class="cd-unit">Mins</span>
+                </div>
+                <span class="countdown-sep">:</span>
+                <div class="countdown-box">
+                  <span id="cd-seconds">00</span>
+                  <span class="cd-unit">Secs</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating phone mockup -->
+          <div class="hero-visual reveal reveal-delay-2">
+            <div class="mockup-wrap">
+              <div class="mockup-phone">
+                <div class="mockup-screen">
+                  <div class="mock-header">
+                    <div class="mock-avatar">🧑‍⚕️</div>
+                    <div>
+                      <div class="mock-name">Dr. Sarah M.</div>
+                      <div class="mock-status">● Online now</div>
+                    </div>
+                  </div>
+                  <div class="mock-bubble them">
+                    Hi! I'm here to listen. How are you feeling today?
+                  </div>
+                  <div class="mock-bubble me">
+                    I've been a bit overwhelmed with work lately...
+                  </div>
+                  <div class="mock-bubble them">
+                    That's completely understandable. Let's explore some
+                    strategies to help you manage that stress.
+                  </div>
+                  <div class="mock-typing">
+                    <div class="mock-typing-dots">
+                      <span></span><span></span><span></span>
+                    </div>
+                    Dr. Sarah is typing...
+                  </div>
+                  <div class="mock-input-bar">
+                    <span>💬</span>
+                    <span>Type a message...</span>
+                  </div>
+                </div>
+              </div>
+              <div class="float-badge left">🔒 End-to-End Encrypted</div>
+              <div class="float-badge right">✅ Certified Counsellors</div>
+              <div class="float-badge bottom">🕐 24/7 Available</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Stats ──────────────────────────────────────────────────────── -->
+    <section id="stats">
+      <div class="container">
+        <div class="stats-grid glass reveal">
+          <div class="stat-item">
+            <span class="stat-icon">🙋</span>
+            <div class="stat-num" id="statWaitlist">0</div>
+            <div class="stat-label">Waitlist Members</div>
+          </div>
+          <div class="stat-item">
+            <span class="stat-icon">🏆</span>
+            <div class="stat-num" data-target="150">0</div>
+            <div class="stat-label">Verified Counsellors</div>
+          </div>
+          <div class="stat-item">
+            <span class="stat-icon">🧠</span>
+            <div class="stat-num" data-target="8">0</div>
+            <div class="stat-label">Specialisation Areas</div>
+          </div>
+          <div class="stat-item">
+            <span class="stat-icon">⭐</span>
+            <div class="stat-num" data-target="98">0</div>
+            <div class="stat-label">% Satisfaction Rate</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Features ──────────────────────────────────────────────────── -->
+    <section id="features">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="badge">Why AAA?</span>
+          <h2 class="section-title">
+            Everything You Need to <span class="grad-text">Feel Supported</span>
+          </h2>
+          <p class="section-sub">
+            A comprehensive platform designed with your privacy, comfort, and
+            well-being at the centre.
+          </p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card reveal reveal-delay-1">
+            <div
+              class="feature-icon"
+              style="
+                background: var(--gray-light);
+                border: 1px solid var(--border);
+              "
+            >
+              🔐
+            </div>
+            <h3>Complete Anonymity</h3>
+            <p>
+              Communicate with counsellors without revealing your identity. Your
+              privacy is protected with end-to-end encryption.
+            </p>
+          </div>
+          <div class="feature-card reveal reveal-delay-2">
+            <div
+              class="feature-icon"
+              style="
+                background: var(--gray-light);
+                border: 1px solid var(--border);
+              "
+            >
+              🏆
+            </div>
+            <h3>Certified Professionals</h3>
+            <p>
+              Every counsellor is vetted, licensed, and experienced. We verify
+              credentials before anyone joins our platform.
+            </p>
+          </div>
+          <div class="feature-card reveal reveal-delay-3">
+            <div
+              class="feature-icon"
+              style="
+                background: var(--gray-light);
+                border: 1px solid var(--border);
+              "
+            >
+              🤖
+            </div>
+            <h3>AI-Powered Matching</h3>
+            <p>
+              Our smart algorithm matches you with the right counsellor based on
+              your needs, preferences, and compatibility.
+            </p>
+          </div>
+          <div class="feature-card reveal reveal-delay-1">
+            <div
+              class="feature-icon"
+              style="
+                background: var(--gray-light);
+                border: 1px solid var(--border);
+              "
+            >
+              📱
+            </div>
+            <h3>Multi-Channel Support</h3>
+            <p>
+              Chat, voice, or video sessions — connect the way you feel most
+              comfortable, whenever you need it.
+            </p>
+          </div>
+          <div class="feature-card reveal reveal-delay-2">
+            <div
+              class="feature-icon"
+              style="
+                background: var(--gray-light);
+                border: 1px solid var(--border);
+              "
+            >
+              🗓️
+            </div>
+            <h3>Flexible Scheduling</h3>
+            <p>
+              Book sessions at your convenience, access emergency support, and
+              receive timely reminders for appointments.
+            </p>
+          </div>
+          <div class="feature-card reveal reveal-delay-3">
+            <div
+              class="feature-icon"
+              style="
+                background: var(--gray-light);
+                border: 1px solid var(--border);
+              "
+            >
+              📈
+            </div>
+            <h3>Track Your Progress</h3>
+            <p>
+              Set goals, monitor your mental health journey, and celebrate
+              milestones with interactive tools and insights.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Video Demo ─────────────────────────────────────────────────── -->
+    <section id="demo">
+      <div class="container">
+        <div class="demo-inner">
+          <div class="demo-text reveal">
+            <div class="section-header">
+              <span class="badge">App Preview</span>
+              <h2 class="section-title">
+                See AAA <span class="grad-text">in Action</span>
+              </h2>
+              <p class="section-sub">
+                Watch how our platform makes getting support simple, private,
+                and empowering.
+              </p>
+            </div>
+            <div class="demo-points">
+              <div class="demo-point">
+                <div class="icon">🔍</div>
+                <div class="txt">
+                  <strong>Discover Your Counsellor</strong>
+                  <span
+                    >Browse profiles, specialisations, availability and
+                    reviews.</span
+                  >
+                </div>
+              </div>
+              <div class="demo-point">
+                <div class="icon">💬</div>
+                <div class="txt">
+                  <strong>Start a Session Instantly</strong>
+                  <span
+                    >Begin an anonymous chat or book a scheduled video
+                    call.</span
+                  >
+                </div>
+              </div>
+              <div class="demo-point">
+                <div class="icon">🧘</div>
+                <div class="txt">
+                  <strong>Access Wellbeing Resources</strong>
+                  <span
+                    >Explore mindfulness tools, articles, and self-assessment
+                    exercises.</span
+                  >
+                </div>
+              </div>
+              <div class="demo-point">
+                <div class="icon">🌱</div>
+                <div class="txt">
+                  <strong>Grow at Your Own Pace</strong>
+                  <span
+                    >Track goals, measure progress, and build lasting
+                    resilience.</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal reveal-delay-2">
+            <div
+              class="video-container"
+              id="videoThumb"
+              onclick="openVideoModal()"
+            >
+              <!-- Gradient placeholder — replace src with a real thumbnail when available -->
+              <div
+                style="
+                  position: absolute;
+                  inset: 0;
+                  background: linear-gradient(
+                    135deg,
+                    #1e1b4b 0%,
+                    #0f172a 50%,
+                    #0c1a1a 100%
+                  );
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <!-- Decorative app screens inside -->
+                <div style="display: flex; gap: 12px; opacity: 0.6">
+                  <div
+                    style="
+                      width: 90px;
+                      height: 140px;
+                      background: #e8e8e8;
+                      border-radius: 14px;
+                      border: 1px solid #d0d0d0;
+                    "
+                  ></div>
+                  <div
+                    style="
+                      width: 90px;
+                      height: 140px;
+                      background: #f0f0f0;
+                      border-radius: 14px;
+                      border: 1px solid #d8d8d8;
+                      margin-top: 20px;
+                    "
+                  ></div>
+                  <div
+                    style="
+                      width: 90px;
+                      height: 140px;
+                      background: #e8e8e8;
+                      border-radius: 14px;
+                      border: 1px solid #d0d0d0;
+                    "
+                  ></div>
+                </div>
+              </div>
+              <div class="video-overlay">
+                <div class="play-btn">▶</div>
+                <span class="video-label">Watch App Demo · 2 min</span>
+              </div>
+            </div>
+            <p
+              style="
+                text-align: center;
+                font-size: 12px;
+                color: var(--text-muted);
+                margin-top: 12px;
+              "
+            >
+              Demo video coming soon — leave your details below to get early
+              access
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+      <div class="video-modal-inner">
+        <button class="video-modal-close" onclick="closeVideoModal()">✕</button>
+        <!-- Replace the src with your actual YouTube/Vimeo embed URL -->
+        <div
+          id="videoPlaceholder"
+          style="
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 16px;
+            background: #f4f4f4;
+            color: var(--text-muted);
+          "
+        >
+          <div style="font-size: 48px">🎬</div>
+          <p style="font-size: 16px; font-weight: 600">
+            Demo Video Coming Soon
+          </p>
+          <p style="font-size: 13px; max-width: 300px; text-align: center">
+            We're putting the finishing touches on our app demo. Join the
+            waitlist to be first to see it!
+          </p>
+          <a
+            href="#waitlist"
+            class="btn btn-primary"
+            onclick="closeVideoModal()"
+            style="margin-top: 8px"
+            >Join Waitlist →</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Waitlist Form ───────────────────────────────────────────────── -->
+    <section id="waitlist">
+      <div class="container">
+        <div class="section-header reveal" style="margin-bottom: 40px">
+          <span class="badge">Get Early Access</span>
+          <h2 class="section-title">
+            Join the <span class="grad-text">Waitlist</span>
+          </h2>
+          <p class="section-sub">
+            Be among the first to experience AnyAdviceApp. Early members unlock
+            exclusive benefits.
+          </p>
+        </div>
+        <div class="waitlist-wrap reveal reveal-delay-1">
+          <div class="form-card glass">
+            <div class="position-counter">
+              <span>🎯</span>
+              <span
+                >You'll receive your queue position and early-access link by
+                email</span
+              >
+            </div>
+
+            <div id="waitlistForm">
+              <h3 class="form-title">Reserve Your Spot</h3>
+              <p class="form-subtitle">
+                Secure your place — takes less than 30 seconds.
+              </p>
+
+              <form id="signupForm" novalidate>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <div class="input-wrap">
+                      <span class="input-icon">👤</span>
+                      <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        placeholder="Emma"
+                        autocomplete="given-name"
+                      />
+                    </div>
+                    <span class="field-error" id="firstNameErr"></span>
+                  </div>
+                  <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <div class="input-wrap">
+                      <span class="input-icon">👤</span>
+                      <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        placeholder="Johnson"
+                        autocomplete="family-name"
+                      />
+                    </div>
+                    <span class="field-error" id="lastNameErr"></span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <div class="input-wrap">
+                    <span class="input-icon">✉️</span>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="emma@example.com"
+                      autocomplete="email"
+                    />
+                  </div>
+                  <span class="field-error" id="emailErr"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="phone"
+                    >Phone Number
+                    <span style="color: var(--text-muted); font-weight: 400"
+                      >(optional)</span
+                    ></label
+                  >
+                  <div class="input-wrap">
+                    <span class="input-icon">📱</span>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      placeholder="+44 7000 000000"
+                      autocomplete="tel"
+                    />
+                  </div>
+                  <span class="field-error" id="phoneErr"></span>
+                </div>
+
+                <div class="form-check">
+                  <input type="checkbox" id="consent" name="consent" />
+                  <label for="consent">
+                    I agree to receive updates about AnyAdviceApp and understand
+                    my data will be handled in accordance with the
+                    <a href="/privacy/">Privacy Policy</a>. You can unsubscribe
+                    anytime.
+                  </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary form-submit">
+                  <span>🚀</span>
+                  <span>Join the Waiting List</span>
+                </button>
+              </form>
+            </div>
+
+            <div class="form-success" id="waitlistSuccess">
+              <div class="success-icon">🎉</div>
+              <h3>You're on the list!</h3>
+              <p>
+                Thank you for joining. We'll send your confirmation and queue
+                position to your email shortly.<br /><br />
+                While you wait, complete our quick survey below to help us build
+                the best experience for you.
+              </p>
+              <a href="#survey" class="btn btn-primary" style="margin-top: 24px"
+                >Take the Survey →</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Survey (5 steps + referral) ───────────────────────────────── -->
+    <section id="survey">
+      <div class="container">
+        <div class="section-header reveal" style="margin-bottom: 40px">
+          <span class="badge">Quick Survey</span>
+          <h2 class="section-title">
+            Help Us Build <span class="grad-text">For You</span>
+          </h2>
+          <p class="section-sub">
+            Five quick questions to help us shape the app around what you
+            actually need. Takes under 3 minutes.
+          </p>
+        </div>
+        <div class="survey-wrap reveal reveal-delay-1">
+          <div class="survey-card glass">
+            <div id="surveyMain">
+              <!-- Progress (5 steps) -->
+              <div class="survey-progress">
+                <div class="progress-steps" id="progressSteps">
+                  <div class="progress-step active" data-step="1">
+                    <div class="step-circle">1</div>
+                    <span class="step-label">Type</span>
+                  </div>
+                  <div class="progress-step" data-step="2">
+                    <div class="step-circle">2</div>
+                    <span class="step-label">Payment</span>
+                  </div>
+                  <div class="progress-step" data-step="3">
+                    <div class="step-circle">3</div>
+                    <span class="step-label">Format</span>
+                  </div>
+                  <div class="progress-step" data-step="4">
+                    <div class="step-circle">4</div>
+                    <span class="step-label">About You</span>
+                  </div>
+                  <div class="progress-step" data-step="5">
+                    <div class="step-circle">5</div>
+                    <span class="step-label">Notes</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ── Step 1: Counselling type ── -->
+              <div class="survey-step active" id="step1">
+                <div class="survey-q">What type of counselling are you interested in?</div>
+                <div class="survey-hint">Select all that apply — we'll prioritise these for launch.</div>
+                <div class="check-grid">
+                  <div class="check-item"><input type="checkbox" id="c1" name="counselling" value="individual"/><label for="c1"><span class="ci">🙋</span> Individual Counselling</label></div>
+                  <div class="check-item"><input type="checkbox" id="c2" name="counselling" value="couples"/><label for="c2"><span class="ci">💑</span> Couples Therapy</label></div>
+                  <div class="check-item"><input type="checkbox" id="c3" name="counselling" value="family"/><label for="c3"><span class="ci">👨‍👩‍👧</span> Family Counselling</label></div>
+                  <div class="check-item"><input type="checkbox" id="c4" name="counselling" value="coaching"/><label for="c4"><span class="ci">🎯</span> Mental Health Coaching</label></div>
+                  <div class="check-item"><input type="checkbox" id="c5" name="counselling" value="career"/><label for="c5"><span class="ci">💼</span> Career Counselling</label></div>
+                  <div class="check-item"><input type="checkbox" id="c6" name="counselling" value="anxiety"/><label for="c6"><span class="ci">🌊</span> Anxiety &amp; Stress</label></div>
+                  <div class="check-item"><input type="checkbox" id="c7" name="counselling" value="depression"/><label for="c7"><span class="ci">🌧️</span> Depression Support</label></div>
+                  <div class="check-item"><input type="checkbox" id="c8" name="counselling" value="trauma"/><label for="c8"><span class="ci">🌿</span> Trauma Recovery</label></div>
+                  <div class="check-item check-item-other"><input type="checkbox" id="c9" name="counselling" value="other" id="counsellingOtherCheck"/><label for="c9"><span class="ci">✏️</span> Other</label></div>
+                </div>
+                <div id="counsellingOtherWrap" style="display:none;margin-bottom:20px;">
+                  <input type="text" id="counsellingOtherText" placeholder="Please describe the type of counselling..." style="width:100%;padding:13px 14px;background:#fff;border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:15px;font-family:Urbanist,sans-serif;outline:none;" onfocus="this.style.borderColor='#111';this.style.boxShadow='0 0 0 3px rgba(0,0,0,0.08)';" onblur="this.style.borderColor='var(--border)';this.style.boxShadow='none';"/>
+                </div>
+                <div class="survey-nav">
+                  <span style="font-size:13px;color:var(--text-muted)">Step 1 of 5</span>
+                  <div class="survey-nav-right"><button class="btn btn-primary" onclick="nextStep(2)">Next →</button></div>
+                </div>
+              </div>
+
+              <!-- ── Step 2: Payment ── -->
+              <div class="survey-step" id="step2">
+                <div class="survey-q">Would you be willing to pay for AAA?</div>
+                <div class="survey-hint">Your honest answer helps us plan our pricing fairly.</div>
+                <div class="radio-grid">
+                  <div class="radio-item"><input type="radio" id="p1" name="payment" value="free_only"/><label for="p1"><div class="r-left"><span class="ri">🆓</span><div><div>Free only — I wouldn't pay</div><div class="r-desc">Only if the app is completely free</div></div></div><div class="radio-check"></div></label></div>
+                  <div class="radio-item"><input type="radio" id="p2" name="payment" value="freemium"/><label for="p2"><div class="r-left"><span class="ri">✨</span><div><div>Freemium — free basics, pay for more</div><div class="r-desc">I'd pay for premium features or unlimited sessions</div></div></div><div class="radio-check"></div></label></div>
+                  <div class="radio-item"><input type="radio" id="p3" name="payment" value="subscription"/><label for="p3"><div class="r-left"><span class="ri">📅</span><div><div>Yes — monthly subscription</div><div class="r-desc">Willing to pay a monthly fee for full access</div></div></div><div class="radio-check"></div></label></div>
+                  <div class="radio-item"><input type="radio" id="p4" name="payment" value="per_session"/><label for="p4"><div class="r-left"><span class="ri">🎟️</span><div><div>Yes — pay per session</div><div class="r-desc">I prefer to pay only when I use it</div></div></div><div class="radio-check"></div></label></div>
+                </div>
+                <div id="priceRangeSection" class="price-range-wrap" style="display:none;">
+                  <label>How much would you pay? (slide to set)</label>
+                  <div class="price-range">
+                    <span class="price-display" id="priceDisplay">GHS 100 / month</span>
+                    <input type="range" id="priceSlider" min="50" max="500" step="50" value="100" oninput="updatePrice(this.value)"/>
+                    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);"><span>GHS 50</span><span>GHS 500+</span></div>
+                  </div>
+                </div>
+                <div class="survey-nav">
+                  <button class="btn btn-ghost" onclick="nextStep(1)">← Back</button>
+                  <div class="survey-nav-right"><button class="btn btn-primary" onclick="nextStep(3)">Next →</button></div>
+                </div>
+              </div>
+
+              <!-- ── Step 3: Session format & frequency ── -->
+              <div class="survey-step" id="step3">
+                <div class="survey-q">How would you prefer to connect with a counsellor?</div>
+                <div class="survey-hint">Select all that work for you.</div>
+                <div class="check-grid" style="margin-bottom:28px;">
+                  <div class="check-item"><input type="checkbox" id="f1" name="format" value="text_chat"/><label for="f1"><span class="ci">💬</span> Text / Chat</label></div>
+                  <div class="check-item"><input type="checkbox" id="f2" name="format" value="voice"/><label for="f2"><span class="ci">📞</span> Voice Call</label></div>
+                  <div class="check-item"><input type="checkbox" id="f3" name="format" value="video"/><label for="f3"><span class="ci">📹</span> Video Call</label></div>
+                  <div class="check-item"><input type="checkbox" id="f4" name="format" value="no_preference"/><label for="f4"><span class="ci">🤷</span> No Preference</label></div>
+                </div>
+                <div class="survey-q" style="font-size:17px;margin-top:4px;">How often would you use the app?</div>
+                <div class="survey-hint">Helps us plan session availability.</div>
+                <div class="radio-grid">
+                  <div class="radio-item"><input type="radio" id="fr1" name="frequency" value="weekly"/><label for="fr1"><div class="r-left"><span class="ri">📆</span><div><div>Weekly</div><div class="r-desc">Regular weekly sessions</div></div></div><div class="radio-check"></div></label></div>
+                  <div class="radio-item"><input type="radio" id="fr2" name="frequency" value="biweekly"/><label for="fr2"><div class="r-left"><span class="ri">🗓️</span><div><div>Every two weeks</div><div class="r-desc">Fortnightly check-ins</div></div></div><div class="radio-check"></div></label></div>
+                  <div class="radio-item"><input type="radio" id="fr3" name="frequency" value="monthly"/><label for="fr3"><div class="r-left"><span class="ri">🌙</span><div><div>Monthly</div><div class="r-desc">Once a month touchpoint</div></div></div><div class="radio-check"></div></label></div>
+                  <div class="radio-item"><input type="radio" id="fr4" name="frequency" value="as_needed"/><label for="fr4"><div class="r-left"><span class="ri">⚡</span><div><div>As needed</div><div class="r-desc">Only when I feel I need it</div></div></div><div class="radio-check"></div></label></div>
+                </div>
+                <div class="survey-nav">
+                  <button class="btn btn-ghost" onclick="nextStep(2)">← Back</button>
+                  <div class="survey-nav-right"><button class="btn btn-primary" onclick="nextStep(4)">Next →</button></div>
+                </div>
+              </div>
+
+              <!-- ── Step 4: About you ── -->
+              <div class="survey-step" id="step4">
+                <div class="survey-q">A little about you</div>
+                <div class="survey-hint">Completely optional — helps us tailor the experience.</div>
+                <div class="form-group">
+                  <label for="ageRange">Age range</label>
+                  <div class="input-wrap">
+                    <span class="input-icon">🎂</span>
+                    <select id="ageRange" name="ageRange" style="width:100%;padding:13px 14px 13px 40px;background:#fff;border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:15px;font-family:Urbanist,sans-serif;outline:none;appearance:none;cursor:pointer;">
+                      <option value="">Prefer not to say</option>
+                      <option value="under18">Under 18</option>
+                      <option value="18-24">18 – 24</option>
+                      <option value="25-34">25 – 34</option>
+                      <option value="35-44">35 – 44</option>
+                      <option value="45-54">45 – 54</option>
+                      <option value="55+">55+</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group" style="margin-bottom:8px;"><label>How did you hear about us?</label></div>
+                <div class="check-grid" style="margin-bottom:28px;grid-template-columns:repeat(2,1fr);">
+                  <div class="check-item"><input type="checkbox" id="h1" name="source" value="social"/><label for="h1"><span class="ci">📲</span> Social Media</label></div>
+                  <div class="check-item"><input type="checkbox" id="h2" name="source" value="friend"/><label for="h2"><span class="ci">🗣️</span> Friend / Family</label></div>
+                  <div class="check-item"><input type="checkbox" id="h3" name="source" value="search"/><label for="h3"><span class="ci">🔍</span> Search Engine</label></div>
+                  <div class="check-item"><input type="checkbox" id="h4" name="source" value="other"/><label for="h4"><span class="ci">🌐</span> Other</label></div>
+                </div>
+                <div class="form-group">
+                  <label for="surveyEmail">Your email address <span style="color:var(--text-muted);font-weight:400">(optional — if you haven't registered yet)</span></label>
+                  <div class="input-wrap">
+                    <span class="input-icon">✉️</span>
+                    <input type="email" id="surveyEmail" placeholder="your@email.com" style="width:100%;padding:13px 14px 13px 40px;background:#fff;border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:15px;font-family:Urbanist,sans-serif;outline:none;" onfocus="this.style.borderColor='#111';this.style.boxShadow='0 0 0 3px rgba(0,0,0,0.08)';" onblur="this.style.borderColor='var(--border)';this.style.boxShadow='none';"/>
+                  </div>
+                </div>
+                <div class="survey-nav">
+                  <button class="btn btn-ghost" onclick="nextStep(3)">← Back</button>
+                  <div class="survey-nav-right"><button class="btn btn-primary" onclick="nextStep(5)">Next →</button></div>
+                </div>
+              </div>
+
+              <!-- ── Step 5: Additional notes ── -->
+              <div class="survey-step" id="step5">
+                <div class="survey-q">Anything else you'd like us to know?</div>
+                <div class="survey-hint">Feature requests, concerns, or anything on your mind. This is optional.</div>
+                <div class="form-group">
+                  <div class="input-wrap">
+                    <textarea id="extraNotes" name="extraNotes" rows="4" placeholder="Feature requests, questions, concerns..." style="width:100%;padding:13px 14px;background:#fff;border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:15px;font-family:Urbanist,sans-serif;outline:none;resize:vertical;line-height:1.5;" onfocus="this.style.borderColor='#111';this.style.boxShadow='0 0 0 3px rgba(0,0,0,0.08)';" onblur="this.style.borderColor='var(--border)';this.style.boxShadow='none';" oninput="document.getElementById('charCount').textContent=this.value.length"></textarea>
+                    <div class="char-counter"><span id="charCount">0</span> / 500</div>
+                  </div>
+                </div>
+                <div class="survey-nav">
+                  <button class="btn btn-ghost" onclick="nextStep(4)">← Back</button>
+                  <div class="survey-nav-right">
+                    <button class="btn btn-primary" onclick="submitSurvey()"><span>🌟</span><span>Submit Survey</span></button>
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /#surveyMain -->
+
+            <!-- ── Referral step (shown after submit, before final success) ── -->
+            <div id="surveyReferral" style="display:none;">
+              <div style="text-align:center;margin-bottom:28px;">
+                <div style="font-size:40px;margin-bottom:12px;">💚</div>
+                <h3 style="font-size:22px;font-weight:800;margin-bottom:8px;">Know someone who could benefit?</h3>
+                <p style="font-size:14px;color:var(--text-muted);max-width:400px;margin:0 auto;line-height:1.7;">Share AnyAdviceApp with someone you care about. Enter their details below and we'll send them a gentle nudge — completely optional.</p>
+              </div>
+              <div class="form-group">
+                <label for="refName">Their name</label>
+                <div class="input-wrap">
+                  <span class="input-icon">👤</span>
+                  <input type="text" id="refName" placeholder="e.g. Alex Johnson" style="width:100%;padding:13px 14px 13px 40px;background:#fff;border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:15px;font-family:Urbanist,sans-serif;outline:none;" onfocus="this.style.borderColor='#111';this.style.boxShadow='0 0 0 3px rgba(0,0,0,0.08)';" onblur="this.style.borderColor='var(--border)';this.style.boxShadow='none';"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="refContact">Their phone number or email address</label>
+                <div class="input-wrap">
+                  <span class="input-icon">📬</span>
+                  <input type="text" id="refContact" placeholder="e.g. +233 24 000 0000 or alex@email.com" style="width:100%;padding:13px 14px 13px 40px;background:#fff;border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:15px;font-family:Urbanist,sans-serif;outline:none;" onfocus="this.style.borderColor='#111';this.style.boxShadow='0 0 0 3px rgba(0,0,0,0.08)';" onblur="this.style.borderColor='var(--border)';this.style.boxShadow='none';"/>
+                </div>
+              </div>
+              <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:8px;">
+                <button class="btn btn-ghost" onclick="finishSurvey()">Skip</button>
+                <button class="btn btn-primary" onclick="finishSurvey(true)"><span>💌</span><span>Send Referral</span></button>
+              </div>
+            </div>
+
+            <!-- ── Final success ── -->
+            <div class="survey-success" id="surveySuccess">
+              <div class="success-icon">🌟</div>
+              <h3>Thank you so much!</h3>
+              <p style="color:var(--text-muted);max-width:380px;margin:0 auto;line-height:1.7;">
+                Your feedback is invaluable. We'll use your responses to build an app that truly serves your needs. Watch your inbox — we'll be in touch soon!
+              </p>
+              <div style="margin-top:28px;padding:20px;background:var(--gray-light);border:1px solid var(--border);border-radius:12px;max-width:340px;margin-left:auto;margin-right:auto;">
+                <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px;">Share with someone who needs support 💚</div>
+                <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+                  <button onclick="shareApp('twitter')" class="btn btn-ghost" style="padding:8px 16px;font-size:13px">𝕏 Twitter</button>
+                  <button onclick="shareApp('whatsapp')" class="btn btn-ghost" style="padding:8px 16px;font-size:13px">💬 WhatsApp</button>
+                  <button onclick="shareApp('copy')" class="btn btn-ghost" style="padding:8px 16px;font-size:13px" id="copyBtn">🔗 Copy Link</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Testimonials ───────────────────────────────────────────────── -->
+    <section id="testimonials">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="badge">Early Feedback</span>
+          <h2 class="section-title">
+            What People Are <span class="grad-text">Saying</span>
+          </h2>
+          <p class="section-sub">
+            Voices from our early testers and mental health community members.
+          </p>
+        </div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card reveal reveal-delay-1">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">
+              "The anonymity feature completely changed how I approach therapy.
+              I finally felt safe enough to open up honestly without worrying
+              about judgement."
+            </p>
+            <div class="testimonial-author">
+              <div class="t-avatar">👩</div>
+              <div>
+                <div class="t-name">Anonymous User, 28</div>
+                <div class="t-role">Early Beta Tester</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card reveal reveal-delay-2">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">
+              "As a counsellor, AAA's platform is thoughtfully designed. The
+              matching algorithm genuinely helps me connect with clients whose
+              needs align with my expertise."
+            </p>
+            <div class="testimonial-author">
+              <div class="t-avatar">🧑‍⚕️</div>
+              <div>
+                <div class="t-name">Dr. Marcus T.</div>
+                <div class="t-role">Licensed Therapist, Partner Counsellor</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card reveal reveal-delay-3">
+            <div class="testimonial-stars">★★★★☆</div>
+            <p class="testimonial-text">
+              "I've tried other mental health apps but AAA feels different —
+              more human, more secure. The progress tracking keeps me motivated
+              between sessions."
+            </p>
+            <div class="testimonial-author">
+              <div class="t-avatar">👨</div>
+              <div>
+                <div class="t-name">James O., 35</div>
+                <div class="t-role">Waitlist Member</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {% include '_footer.html' %}
+
+    <!-- ─── JavaScript ──────────────────────────────────────────────────── -->
+    <script src="{% static 'script.js' %}"></script>
+    <script>
+      /* Hamburger toggle */
+      const hamburger = document.getElementById("navHamburger");
+      const mobileNav = document.getElementById("navMobile");
+      if (hamburger && mobileNav) {
+        hamburger.addEventListener("click", () => {
+          const open = mobileNav.classList.toggle("open");
+          hamburger.textContent = open ? "✕" : "☰";
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}AnyAdviceApp{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    <link rel="icon" type="image/png" href="{% static 'assets/icons/logo-black.png' %}" />
+    <link rel="apple-touch-icon" href="{% static 'assets/icons/logo-black.png' %}" />
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    {% include '_nav.html' with nav_dark=True active=active_page %}
+
+    {% block content %}{% endblock %}
+
+    {% include '_footer.html' %}
+
+    <script src="{% static 'script.js' %}"></script>
+    <script>
+      /* Navbar scroll */
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
+        navbar.classList.toggle("scrolled", window.scrollY > 40);
+      }, { passive: true });
+
+      /* Hamburger toggle */
+      const hamburger = document.getElementById("navHamburger");
+      const mobileNav = document.getElementById("navMobile");
+      if (hamburger && mobileNav) {
+        hamburger.addEventListener("click", () => {
+          const open = mobileNav.classList.toggle("open");
+          hamburger.textContent = open ? "✕" : "☰";
+        });
+      }
+
+      /* Scroll reveal for inner pages */
+      document.querySelectorAll(".reveal").forEach(el => {
+        const obs = new IntersectionObserver(entries => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); obs.disconnect(); } });
+        }, { threshold: 0.1 });
+        obs.observe(el);
+      });
+    </script>
+    {% block scripts %}{% endblock %}
+  </body>
+</html>
