@@ -51,7 +51,7 @@ class Survey(models.Model):
     # Stored as comma-separated values e.g. "individual,couples,anxiety"
     counselling_types  = models.CharField(max_length=500, blank=True)
     payment_preference = models.CharField(max_length=20, choices=PAYMENT_CHOICES, blank=True)
-    price_willingness  = models.CharField(max_length=10, blank=True)  # £ amount
+    price_willingness  = models.CharField(max_length=10, blank=True)  # GHS amount
     age_range          = models.CharField(max_length=10, choices=AGE_CHOICES, blank=True)
     sources            = models.CharField(max_length=200, blank=True)  # comma-separated
     extra_notes        = models.TextField(blank=True)

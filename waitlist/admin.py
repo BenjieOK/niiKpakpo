@@ -27,7 +27,7 @@ def export_surveys_csv(modeladmin, request, queryset):
     writer = csv.writer(response)
     writer.writerow([
         "ID", "Email", "Counselling Types", "Payment Preference",
-        "Price Willingness (£)", "Age Range", "Sources", "Extra Notes", "Submitted At",
+        "Price Willingness (GHS )", "Age Range", "Sources", "Extra Notes", "Submitted At",
     ])
     for s in queryset.order_by("created_at"):
         writer.writerow([
@@ -128,4 +128,4 @@ class SurveyAdmin(admin.ModelAdmin):
 
     @admin.display(description="Price Willingness")
     def price_willingness_display(self, obj):
-        return f"£{obj.price_willingness}" if obj.price_willingness else "—"
+        return f"GHS {obj.price_willingness}" if obj.price_willingness else "—"

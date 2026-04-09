@@ -2186,3 +2186,147 @@ nav.nav-dark:not(.scrolled) .nav-hamburger:hover {
   background: rgba(255,255,255,0.1);
   border-color: rgba(255,255,255,0.6);
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   PRICE PROGRESS BAR
+═══════════════════════════════════════════════════════════════════ */
+.price-bar-wrap {
+  background: var(--gray-light);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 28px;
+}
+
+.price-bar-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.price-bar-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 4px;
+}
+
+.price-bar-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.price-badge {
+  background: var(--black);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+  padding: 10px 18px;
+  border-radius: 12px;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+/* Track */
+.price-bar-track {
+  position: relative;
+  height: 8px;
+  background: var(--border);
+  border-radius: 100px;
+  margin-bottom: 0;
+  overflow: hidden;
+}
+
+.price-bar-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: var(--black);
+  border-radius: 100px;
+  transition: width 0.12s ease;
+}
+
+/* Invisible range input overlaid on the track */
+.price-bar-input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+  margin: -8px 0 0 0;
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+.price-bar-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--black);
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.price-bar-input::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+.price-bar-input::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--black);
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  cursor: pointer;
+}
+
+/* Tick labels */
+.price-bar-ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Tier labels */
+.price-tier-labels {
+  display: flex;
+  margin-top: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.price-tier {
+  flex: 1;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 5px 2px;
+  color: var(--text-muted);
+  background: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  transition: background 0.2s, color 0.2s;
+  border-right: 1px solid var(--border);
+}
+.price-tier:last-child { border-right: none; }
+.price-tier.active {
+  background: var(--black);
+  color: #fff;
+}
+
+@media (max-width: 500px) {
+  .price-bar-header { flex-direction: column; align-items: flex-start; }
+  .price-tier-labels { display: none; }
+  .price-bar-ticks { font-size: 10px; }
+}

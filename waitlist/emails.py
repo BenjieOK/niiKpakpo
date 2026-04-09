@@ -143,7 +143,7 @@ def send_survey_email(survey):
     sources     = survey.sources.replace(",", ", ") if survey.sources else "—"
     payment     = survey.get_payment_preference_display() if survey.payment_preference else "—"
     age         = survey.get_age_range_display() if survey.age_range else "—"
-    price       = f"£{survey.price_willingness}" if survey.price_willingness else "—"
+    price       = f"GHS {survey.price_willingness}" if survey.price_willingness else "—"
 
     name = "Anonymous"
     if survey.registration:

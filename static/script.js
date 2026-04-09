@@ -364,30 +364,33 @@ if (counsellingOtherCheck) {
   });
 }
 
-/* Payment → GHS price slider */
-document.querySelectorAll('input[name="payment"]').forEach((radio) => {
-  radio.addEventListener("change", () => {
-    const show = ["subscription","freemium","per_session"].includes(radio.value);
-    const section = document.getElementById("priceRangeSection");
-    if (section) section.style.display = show ? "block" : "none";
-    const labelEl   = document.querySelector(".price-range-wrap label");
-    const displayEl = document.getElementById("priceDisplay");
-    const sliderVal = document.getElementById("priceSlider")?.value || "100";
-    if (radio.value === "per_session") {
-      if (labelEl) labelEl.textContent = "How much per session? (slide to set)";
-      if (displayEl) displayEl.textContent = "GHS " + sliderVal + " / session";
-    } else {
-      if (labelEl) labelEl.textContent = "How much would you pay per month? (slide to set)";
-      if (displayEl) displayEl.textContent = "GHS " + sliderVal + " / month";
-    }
-  });
-});
+/* Payment radio — no longer toggles price bar (always visible) */
 
 function updatePrice(v) {
-  const isPerSession = document.querySelector('input[name="payment"]:checked')?.value === "per_session";
+  const val = parseInt(v);
+
+  /* Badge */
   const displayEl = document.getElementById("priceDisplay");
-  if (displayEl) displayEl.textContent = "GHS " + v + (isPerSession ? " / session" : " / month");
+  if (displayEl) displayEl.textContent = val >= 500 ? "GHS 500+" : "GHS " + val;
+
+  /* Progress bar fill: slider goes 100→500, map to 0%→100% */
+  const pct = ((val - 100) / (500 - 100)) * 100;
+  const fillEl = document.getElementById("priceBarFill");
+  if (fillEl) fillEl.style.width = pct + "%";
+
+  /* Active tier highlight */
+  document.querySelectorAll(".price-tier").forEach((tier) => {
+    const mn = parseInt(tier.dataset.min);
+    const mx = parseInt(tier.dataset.max);
+    tier.classList.toggle("active", val >= mn && val < mx || (val >= 500 && mx >= 500));
+  });
 }
+
+/* Init price bar on load */
+(function initPriceBar() {
+  const slider = document.getElementById("priceSlider");
+  if (slider) updatePrice(slider.value);
+})();
 
 /* Collect all survey data */
 function collectSurveyData() {

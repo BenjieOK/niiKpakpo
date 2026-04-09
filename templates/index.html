@@ -661,12 +661,32 @@
                   <div class="radio-item"><input type="radio" id="p3" name="payment" value="subscription"/><label for="p3"><div class="r-left"><span class="ri">📅</span><div><div>Yes — monthly subscription</div><div class="r-desc">Willing to pay a monthly fee for full access</div></div></div><div class="radio-check"></div></label></div>
                   <div class="radio-item"><input type="radio" id="p4" name="payment" value="per_session"/><label for="p4"><div class="r-left"><span class="ri">🎟️</span><div><div>Yes — pay per session</div><div class="r-desc">I prefer to pay only when I use it</div></div></div><div class="radio-check"></div></label></div>
                 </div>
-                <div id="priceRangeSection" class="price-range-wrap" style="display:none;">
-                  <label>How much would you pay? (slide to set)</label>
-                  <div class="price-range">
-                    <span class="price-display" id="priceDisplay">GHS 100 / month</span>
-                    <input type="range" id="priceSlider" min="50" max="500" step="50" value="100" oninput="updatePrice(this.value)"/>
-                    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);"><span>GHS 50</span><span>GHS 500+</span></div>
+                <!-- Price willingness — always visible -->
+                <div class="price-bar-wrap">
+                  <div class="price-bar-header">
+                    <div>
+                      <div class="price-bar-label">How much would you be willing to pay?</div>
+                      <div class="price-bar-hint">Drag the slider to set your budget</div>
+                    </div>
+                    <div class="price-badge" id="priceDisplay">GHS 100</div>
+                  </div>
+                  <div class="price-bar-track">
+                    <div class="price-bar-fill" id="priceBarFill" style="width:0%"></div>
+                  </div>
+                  <input type="range" id="priceSlider" class="price-bar-input" min="100" max="500" step="50" value="100" oninput="updatePrice(this.value)"/>
+                  <div class="price-bar-ticks">
+                    <span>GHS 100</span>
+                    <span>GHS 200</span>
+                    <span>GHS 300</span>
+                    <span>GHS 400</span>
+                    <span>GHS 500+</span>
+                  </div>
+                  <div class="price-tier-labels">
+                    <div class="price-tier" data-min="100" data-max="150">Budget</div>
+                    <div class="price-tier" data-min="150" data-max="250">Mid-range</div>
+                    <div class="price-tier" data-min="250" data-max="350">Standard</div>
+                    <div class="price-tier" data-min="350" data-max="450">Premium</div>
+                    <div class="price-tier" data-min="450" data-max="500">Top-tier</div>
                   </div>
                 </div>
                 <div class="survey-nav">
